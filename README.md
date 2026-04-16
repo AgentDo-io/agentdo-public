@@ -13,14 +13,21 @@ Point Claude (or any MCP-compatible agent) at `https://mcp.agentdo.io`, add your
   "mcpServers": {
     "agentdo": {
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-fetch", "https://mcp.agentdo.io"],
-      "env": { "X-API-Key": "ak_your_key_here" }
+      "args": [
+        "-y",
+        "mcp-remote",
+        "https://mcp.agentdo.io",
+        "--header",
+        "X-API-Key:ak_your_key_here"
+      ]
     }
   }
 }
 ```
 
 Restart Claude Desktop. The AgentDo tools appear in the tools list.
+
+> **Why `mcp-remote`?** AgentDo is a hosted HTTP MCP server; Claude Desktop's native MCP transport is stdio, so we use the `mcp-remote` bridge (part of the official MCP ecosystem) to forward calls over HTTPS with your API key attached as a header.
 
 Get an API key at https://agentdo.io/dashboard. See [`docs/mcp-connection.md`](./docs/mcp-connection.md) for n8n, Cursor, and other clients.
 
