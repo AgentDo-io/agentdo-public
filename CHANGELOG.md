@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-04-16
+
 ### Added
 - Currency switcher for lead price (HUF / EUR / USD) on landing pricing card
 - Decimal lead prices supported (step 0.01)
