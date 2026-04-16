@@ -4,7 +4,7 @@
   "displayName": "AgentDo",
   "description": "Search and book real-world services (restaurants, salons, providers) through AI agents.",
   "url": "https://mcp.agentdo.io",
-  "homepage": "https://agentdo.io",
+  "homepage": "https://agentdo.me",
   "documentation": "https://github.com/AgentDo-io/agentdo-public/blob/main/docs/mcp-connection.md",
   "auth": {
     "type": "header",
