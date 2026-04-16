@@ -1,23 +1,72 @@
-# AgentDo — Public
+# AgentDo
 
-AgentDo is an AI-native service marketplace platform. AI agents (Claude, ChatGPT, Gemini, n8n, Cursor) can search and book real-world services through a single MCP / REST endpoint.
+> **AI-native service marketplace.** Let your AI agent search and book real-world services — restaurants, salons, appointments — through a single MCP endpoint.
 
-- **MCP endpoint:** `https://mcp.agentdo.io`
-- **REST API:** `https://api.agentdo.io`
-- **Dashboard:** `https://agentdo.io`
-- **Marketing:** `https://agentdo.me`
+Point Claude (or any MCP-compatible agent) at `https://mcp.agentdo.io`, add your API key, and the agent can call 9 tools to discover providers, check availability, request quotes, book appointments, and more. No per-call fees. Providers pay only for delivered bookings.
 
-This repository hosts the **public-facing artifacts**: documentation, MCP manifest, OpenAPI spec, and the changelog. The application source itself lives in a private repository.
+## Connect in 30 seconds
 
-## Quick links
+**Claude Desktop** — edit `~/Library/Application Support/Claude/claude_desktop_config.json`:
 
-| Resource | Path |
+```json
+{
+  "mcpServers": {
+    "agentdo": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-fetch", "https://mcp.agentdo.io"],
+      "env": { "X-API-Key": "ak_your_key_here" }
+    }
+  }
+}
+```
+
+Restart Claude Desktop. The AgentDo tools appear in the tools list.
+
+Get an API key at https://agentdo.io/dashboard. See [`docs/mcp-connection.md`](./docs/mcp-connection.md) for n8n, Cursor, and other clients.
+
+## Tools
+
+| Tool | What it does |
 |---|---|
-| Changelog | [`CHANGELOG.md`](./CHANGELOG.md) |
-| MCP connection guide | [`docs/mcp-connection.md`](./docs/mcp-connection.md) |
-| API reference | [`docs/api-reference.md`](./docs/api-reference.md) |
-| MCP manifest (one-click install) | [`mcp-manifest.json`](./mcp-manifest.json) |
+| `search` | Find providers by category + location (radius search) |
+| `lookup` | Named-entity resolution — resolve a specific business by name |
+| `availability` | List open time slots for a provider |
+| `book` | Reserve an appointment slot |
+| `order` | Place a food or product order |
+| `quote` | Request a price quote for a custom service |
+| `price_check` | Get current pricing for a known service |
+| `cancel` | Cancel a booking or order |
+| `status` | Check the status of a booking, order, or quote |
+
+Full schemas in [`docs/api-reference.md`](./docs/api-reference.md).
+
+## Endpoints
+
+| | URL |
+|---|---|
+| **MCP** (primary) | `https://mcp.agentdo.io` |
+| **REST API** (alternative) | `https://api.agentdo.io` |
+| **Dashboard** (keys, billing) | `https://agentdo.io` |
+| **Info & sign-up** | `https://agentdo.me` |
+
+## Documentation
+
+- [MCP connection guide](./docs/mcp-connection.md) — Claude Desktop, n8n, Cursor
+- [API reference](./docs/api-reference.md) — REST endpoints, request/response schemas
+- [MCP manifest](./mcp-manifest.json) — one-click add for supported clients
+- [Changelog](./CHANGELOG.md) — MCP / API surface changes
+
+## Pricing
+
+| Who | Pay for |
+|---|---|
+| **AI agents / developers** | Free up to 1000 API calls/hour. No per-call charge. |
+| **Service providers** | A small fee per **delivered** booking — never per click, never per query. Currency and amount configurable in the provider dashboard. |
+
+## Status
+
+Pre-launch. Public Early Access sign-ups at https://agentdo.me.
 
 ## License
 
-The artifacts in this repository are released for documentation and integration purposes. The underlying AgentDo platform is proprietary.
+Artifacts in this repository (docs, manifest, API specs) are released for integration and documentation purposes. The underlying AgentDo platform is proprietary; source lives in a separate, private repository.
